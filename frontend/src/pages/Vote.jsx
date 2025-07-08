@@ -77,6 +77,7 @@ const Vote = () => {
 					Secretary: {votes?.Secretary || 'N/A'}
 				</p>
 			</section>
+
 			<div className=" w-full grid grid-cols-1 gap-8 p-4">
 				{positions.map((position) => (
 					<div
