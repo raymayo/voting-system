@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import candidateRoute from './routes/candidateRoute.js';
 
 
 mongoose.connect('mongodb://localhost:27017/voting-system',)
@@ -10,6 +11,8 @@ mongoose.connect('mongodb://localhost:27017/voting-system',)
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/candidate', candidateRoute);
 
 const port = 5000;
 

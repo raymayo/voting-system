@@ -6,7 +6,7 @@ const candidateSchema = new mongoose.Schema({
     department: { type: String, required: true },
     yearLevel: { type: String, required: true },
     party: { type: String, required: true },
-    imageUrl: { type: String, required: true },
+    imageUrl: { type: String },
 })
 
 const Candidate = mongoose.model('Candidate', candidateSchema);
