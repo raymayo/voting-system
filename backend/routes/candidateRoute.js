@@ -1,11 +1,11 @@
-import Candidate from '../models/Candidate.js';
-import mongoose from 'mongoose';
+
 import express from 'express';
 
-import { CreateCandidate } from '../controllers/candidateController.js';
+import { CreateCandidate, GetCandidate } from '../controllers/candidateController.js';
 
 const router = express.Router();
 
 router.post('/', CreateCandidate);
+router.get('/', GetCandidate)
 
 export default router;

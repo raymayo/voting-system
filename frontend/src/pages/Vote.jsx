@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const Vote = () => {
+	const location = useLocation();
+	const { department, yearLevel } = location.state || {};
+
 	const positions = [
 		'President',
 		'Vice_President',
@@ -9,218 +14,21 @@ const Vote = () => {
 		'Auditor',
 	];
 
-	const candidates = [
-		// LABAN PARTIDO
-		{
-			id: 1,
-			name: 'Edsel Soriano',
-			position: 'President',
-			department: 'BSBA HRM III',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 2,
-			name: 'July Mae S. Agudo',
-			position: 'Vice_President',
-			department: 'BSED Social Studies III',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 3,
-			name: 'Lovely Mae Lacaste',
-			position: 'Secretary',
-			department: 'BSBA FM IV',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 4,
-			name: 'Prince Diño Payawal',
-			position: 'Treasurer',
-			department: 'BSA III',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 5,
-			name: 'Aivy Sionzon',
-			position: 'Auditor',
-			department: 'BSBA OM IV',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 6,
-			name: 'Katrina Navalta',
-			position: 'Senator',
-			department: 'BSHM II',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 7,
-			name: 'John Kevin Hipolito',
-			position: 'Senator',
-			department: 'BSCS II',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 8,
-			name: 'Christine Joy Abayan',
-			position: 'Senator',
-			department: 'BEED II',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 9,
-			name: 'Sharra Mari Ronquillo',
-			position: 'Senator',
-			department: 'BSED Filipino III',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 10,
-			name: 'Bernadette Brides Cañete',
-			position: 'Senator',
-			department: 'BEED I',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 11,
-			name: 'Danielle Evangelista',
-			position: 'Senator',
-			department: 'BSBA OM IV',
-			party: 'Laban Partido',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
+	const [candidates, setCandidates] = useState([]);
 
-		// KABOG PARTY
-		{
-			id: 12,
-			name: 'Eisen Peñaranda',
-			position: 'President',
-			department: 'BSED Filipino III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 13,
-			name: 'Jan Romeo Belardo',
-			position: 'Vice_President',
-			department: 'BSED Social Studies II',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 14,
-			name: 'Fanuel Torres',
-			position: 'Secretary',
-			department: 'BSED Filipino III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 15,
-			name: 'Johnry Ramores',
-			position: 'Treasurer',
-			department: 'BEED III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 16,
-			name: 'Nicole M. Dolleson',
-			position: 'Auditor',
-			department: 'BSBA HRM III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 17,
-			name: 'Gwyneth Ruth Jansen',
-			position: 'Senator',
-			department: 'BEED III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 18,
-			name: 'Alben Labtingao JR.',
-			position: 'Senator',
-			department: 'BSED Social Studies I',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 19,
-			name: 'Rinalynn Dahipon',
-			position: 'Senator',
-			department: 'BSHM II',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 20,
-			name: 'Nicole De Guzman',
-			position: 'Senator',
-			department: 'BSHM I',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 21,
-			name: 'Hazel Valenzuela',
-			position: 'Senator',
-			department: 'BSED Filipino III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 22,
-			name: 'Robbhy Paul A. Datu',
-			position: 'Senator',
-			department: 'BSCS I',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-		{
-			id: 23,
-			name: 'Adrian S. Asuncion',
-			position: 'Senator',
-			department: 'BSBA HRM III',
-			party: 'Kabog Party',
-			imageUrl:
-				'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010',
-		},
-	];
+	useEffect(() => {
+		const fetchCandidates = async () => {
+			try {
+				const { data } = await axios.get('http://localhost:5000/api/candidate');
+				const normalized = data.map((c) => ({ ...c, id: c._id }));
+				setCandidates(normalized);
+			} catch (err) {
+				console.error(err);
+			}
+		};
+
+		fetchCandidates();
+	}, []);
 
 	// eslint-disable-next-line no-unused-vars
 	const [votes, setVotes] = useState({
@@ -241,6 +49,7 @@ const Vote = () => {
 				name: candidate?.name || '',
 			},
 		}));
+		console.log(candidates);
 		console.log(votes);
 	};
 
@@ -303,11 +112,45 @@ const Vote = () => {
 			.replace(/\b\w/g, (char) => char.toUpperCase());
 	}
 
+	const handleSubmitVotes = async () => {
+		try {
+			// Build payload from current vote selections
+			const payload = {
+				yearLevel: yearLevel, // You can get this from user context or selection
+				department: department,
+				votes: {
+					President: votes.President.id,
+					Vice_President: votes.Vice_President.id,
+					Secretary: votes.Secretary.id,
+					Treasurer: votes.Treasurer.id,
+					Auditor: votes.Auditor.id,
+					Senators: votes.Senators.map((senator) => senator.id),
+				},
+			};
+
+			// Submit to your backend
+			const res = await axios.post('http://localhost:5000/api/vote', payload);
+
+			console.log('Vote submitted:', res.data);
+			alert('✅ Your vote has been submitted successfully!');
+		} catch (err) {
+			console.error(
+				'❌ Vote submission failed:',
+				err.response?.data || err.message
+			);
+			alert('❌ Something went wrong. Please try again.');
+		}
+	};
+
 	return (
 		<div className="flex w-full h-screen">
 			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
 				<div>
 					<h1 className="text-2xl font-semibold mb-4">Student's Candidates</h1>
+					<div>
+						<h1>{yearLevel}</h1>
+						<h1>{department}</h1>
+					</div>
 					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">President</h1>
 						<p>{votes?.President.name || 'N/A'}</p>
@@ -335,7 +178,9 @@ const Vote = () => {
 						))}
 					</div>
 				</div>
-				<button className="bg-zinc-900 text-zinc-100 py-2 rounded-md cursor-pointer">
+				<button
+					onClick={handleSubmitVotes}
+					className="bg-zinc-900 text-zinc-100 py-2 rounded-md cursor-pointer">
 					Submit Votes
 				</button>
 			</section>
@@ -363,7 +208,10 @@ const Vote = () => {
 										/>
 										<div className="flex items-center space-x-4">
 											<img
-												src={c.imageUrl}
+												src={
+													c?.imageUrl ||
+													'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010'
+												}
 												alt={c.name}
 												className="w-12 h-12 object-cover rounded-full"
 											/>
@@ -409,7 +257,10 @@ const Vote = () => {
 										}
 									/>
 									<img
-										src={senator.imageUrl}
+										src={
+											senator?.imageUrl ||
+											'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010'
+										}
 										alt={senator.name}
 										className="w-12 h-12 object-cover rounded-full"
 									/>
