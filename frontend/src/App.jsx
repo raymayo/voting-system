@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -10,7 +10,7 @@ import './App.css';
 import Landing from './pages/Landing.jsx';
 import StudentInfo from './pages/StudentInfo.jsx';
 import Vote from './pages/Vote.jsx';
-
+import CreateCandidate from './pages/CreateCandidate.jsx';
 function App() {
 	return (
 		<div>
@@ -19,6 +19,8 @@ function App() {
 					<Route path="/" element={<Landing />} />
 					<Route path="/student-info" element={<StudentInfo />} />
 					<Route path="/vote" element={<Vote />} />
+					<Route path="/create-candidate" element={<CreateCandidate />} />
+					<Route path="*" element={<Navigate to="/" replace />} />
 				</Routes>
 			</Router>
 		</div>
