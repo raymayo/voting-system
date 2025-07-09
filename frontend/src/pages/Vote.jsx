@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Vote = () => {
 	const positions = [
 		'President',
-		'Vice President',
+		'Vice_President',
 		'Secretary',
 		'Treasurer',
 		'Auditor',
@@ -14,7 +14,22 @@ const Vote = () => {
 		President: null,
 		Vice_President: null,
 		Secretary: null,
+		Treasurer: null,
+		Auditor: null,
+		Senators: [],
 	});
+
+	const handleVoteChange = (position, candidateId) => {
+		setVotes((prevVotes) => ({
+			...prevVotes,
+			[position]: candidateId,
+		}));
+		console.log(votes);
+	};
+
+	const handleSenatorVoteChange = (senatorId) => {
+		setVotes((prevVotes) => {
+			const senators = prevVotes.Senators.includes(senatorId)
 
 	const candidates = [
 		// LABAN PARTIDO
@@ -30,7 +45,7 @@ const Vote = () => {
 		{
 			id: 2,
 			name: 'July Mae S. Agudo',
-			position: 'Vice President',
+			position: 'Vice_President',
 			department: 'BSED Social Studies III',
 			party: 'Laban Partido',
 			imageUrl:
@@ -131,7 +146,7 @@ const Vote = () => {
 		{
 			id: 13,
 			name: 'Jan Romeo Belardo',
-			position: 'Vice President',
+			position: 'Vice_President',
 			department: 'BSED Social Studies II',
 			party: 'Kabog Party',
 			imageUrl:
@@ -254,17 +269,36 @@ const Vote = () => {
 
 	return (
 		<div className="flex border w-full h-screen">
-			<section className="max-w-lg border w-full">
-				<h1>Student's Candidates</h1>
-				<p className="text-sm text-gray-600">
-					President: {votes?.President || 'N/A'}
-				</p>
-				<p className="text-sm text-gray-600">
-					Vice President: {votes?.Vice_President || 'N/A'}
-				</p>
-				<p className="text-sm text-gray-600">
-					Secretary: {votes?.Secretary || 'N/A'}
-				</p>
+			<section className="max-w-lg border w-full text-center p-4 flex flex-col justify-between">
+				<div>
+					<h1 className="text-xl font-semibold mb-4">Student's Candidates</h1>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">President</h1>
+						<p>{votes?.President || 'N/A'}</p>
+					</div>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">Vice President</h1>
+						<p>{votes?.Vice_President || 'N/A'}</p>
+					</div>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">Secretary</h1>
+						<p>{votes?.Secretary || 'N/A'}</p>
+					</div>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">Treasurer</h1>
+						<p>{votes?.Treasurer || 'N/A'}</p>
+					</div>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">Auditor</h1>
+						<p>{votes?.Auditor || 'N/A'}</p>
+					</div>
+					<div className="flex flex-col text-center">
+						<h1 className="font-semibold text-lg">Senators</h1>
+					</div>
+				</div>
+				<button className="bg-zinc-900 text-zinc-100 py-2 rounded-md">
+					Submit Votes
+				</button>
 			</section>
 
 			<div className=" w-full flex flex-col gap-2 overflow-y-scroll">
@@ -279,12 +313,13 @@ const Vote = () => {
 								.map((c) => (
 									<label
 										key={c.id}
-										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer  has-checked:border has-checked:border-zinc-900/50 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
+										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100 has-checked:bg-white has-checked:border has-checked:border-zinc-900/50 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
 										<input
 											className="accent-zinc-900"
 											type="radio"
 											name={position}
 											value={c.id}
+											onChange={() => handleVoteChange(position, c.id)}
 											required
 										/>
 										<div className="flex items-center space-x-4">
@@ -307,18 +342,21 @@ const Vote = () => {
 				))}
 
 				<div>
+					<h2 className="text-xl font-bold text-center bg-zinc-900 text-zinc-100 mb-2">
+						Senators
+					</h2>
 					<p>Maximum selection: 6 senators</p>
-					<h2>Select Senators</h2>
 					{Object.keys(groupedByParty).map((party) => (
 						<div
 							key={party}
-							className="border grid grid-cols-2 gap-2 p-4 mb-4 rounded">
+							className="grid grid-cols-2 gap-2 p-4 mb-4 rounded">
 							<h3 className="col-span-2 text-lg font-semibold">{party}</h3>
 							{groupedByParty[party].map((senator) => (
 								<label
 									key={senator.id}
-									className="border rounded p-2 flex items-center gap-3">
+									className="cursor-pointer  has-checked:bg-white hover:bg-zinc-100 has-checked:border-zinc-900/50 border border-white rounded-lg px-4 py-2 flex items-center gap-3">
 									<input
+										className="accent-zinc-900"
 										type="checkbox"
 										id={`senator-${senator.id}`}
 										onChange={(e) => handleChange(e, senator.id)}
