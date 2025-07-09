@@ -7,6 +7,10 @@ const Landing = () => {
 	return (
 		<div className="w-screen h-screen grid place-items-center text-center">
 			<div>
+				<img
+					src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiqAW5DZhfWVqYlFU0p6Gqh5hfqzJTwi1BLw&s"
+					alt=""
+				/>
 				<h1 className="text-4xl">Welcome</h1>
 				<button
 					onClick={() => navigate('/student-info')}

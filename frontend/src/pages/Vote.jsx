@@ -9,38 +9,6 @@ const Vote = () => {
 		'Auditor',
 	];
 
-	// eslint-disable-next-line no-unused-vars
-	const [votes, setVotes] = useState({
-		President: null,
-		Vice_President: null,
-		Secretary: null,
-		Treasurer: null,
-		Auditor: null,
-		Senators: [],
-	});
-
-	const handleVoteChange = (position, candidateId) => {
-		setVotes((prevVotes) => ({
-			...prevVotes,
-			[position]: candidateId,
-		}));
-		console.log(votes);
-	};
-
-	const handleSenatorVoteChange = (senatorId) => {
-		setVotes((prevVotes) => {
-			const senators = prevVotes.Senators.includes(senatorId)
-				? prevVotes.Senators.filter((id) => id !== senatorId)
-				: [...prevVotes.Senators, senatorId];
-			return {
-				...prevVotes,
-				Senators: senators,
-			};
-		});
-
-		console.log(votes.Senators);
-	};
-
 	const candidates = [
 		// LABAN PARTIDO
 		{
@@ -254,6 +222,58 @@ const Vote = () => {
 		},
 	];
 
+	// eslint-disable-next-line no-unused-vars
+	const [votes, setVotes] = useState({
+		President: { id: null, name: '' },
+		Vice_President: { id: null, name: '' },
+		Secretary: { id: null, name: '' },
+		Treasurer: { id: null, name: '' },
+		Auditor: { id: null, name: '' },
+		Senators: [],
+	});
+
+	const handleVoteChange = (position, candidateId) => {
+		const candidate = candidates.find((c) => c.id === candidateId);
+		setVotes((prevVotes) => ({
+			...prevVotes,
+			[position]: {
+				id: candidateId,
+				name: candidate?.name || '',
+			},
+		}));
+		console.log(votes);
+	};
+
+	const handleSenatorVoteChange = (candidateId) => {
+		const candidate = candidates.find((c) => c.id === candidateId);
+
+		setVotes((prevVotes) => {
+			const isAlreadySelected = prevVotes.Senators.some(
+				(s) => s.id === candidateId
+			);
+
+			let updatedSenators;
+			if (isAlreadySelected) {
+				// Remove candidate
+				updatedSenators = prevVotes.Senators.filter(
+					(s) => s.id !== candidateId
+				);
+			} else {
+				// Add candidate (max 6)
+				if (prevVotes.Senators.length >= 6) return prevVotes;
+				updatedSenators = [
+					...prevVotes.Senators,
+					{ id: candidateId, name: candidate.name },
+				];
+			}
+
+			return {
+				...prevVotes,
+				Senators: updatedSenators,
+			};
+		});
+	};
+
 	const [selectedSenators, setSelectedSenators] = useState([]);
 
 	const handleChange = (e, senatorId) => {
@@ -277,35 +297,43 @@ const Vote = () => {
 		return acc;
 	}, {});
 
+	function formatPosition(position) {
+		return position
+			.replace(/_/g, ' ')
+			.replace(/\b\w/g, (char) => char.toUpperCase());
+	}
+
 	return (
-		<div className="flex border w-full h-screen">
-			<section className="max-w-lg border w-full text-center p-4 flex flex-col justify-between">
-				<div>
-					<h1 className="text-xl font-semibold mb-4">Student's Candidates</h1>
-					<div className="flex flex-col text-center">
+		<div className="flex w-full h-screen">
+			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center flex flex-col justify-between">
+				<div className="">
+					<h1 className="text-xl font-medium mb-4  bg-zinc-900 text-zinc-100  border border-zinc-900">
+						Student's Candidates
+					</h1>
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
 						<h1 className="font-semibold text-lg">President</h1>
-						<p>{votes?.President || 'N/A'}</p>
+						<p>{votes?.President.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
 						<h1 className="font-semibold text-lg">Vice President</h1>
-						<p>{votes?.Vice_President || 'N/A'}</p>
+						<p>{votes?.Vice_President.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
 						<h1 className="font-semibold text-lg">Secretary</h1>
-						<p>{votes?.Secretary || 'N/A'}</p>
+						<p>{votes?.Secretary.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
 						<h1 className="font-semibold text-lg">Treasurer</h1>
-						<p>{votes?.Treasurer || 'N/A'}</p>
+						<p>{votes?.Treasurer.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
 						<h1 className="font-semibold text-lg">Auditor</h1>
-						<p>{votes?.Auditor || 'N/A'}</p>
+						<p>{votes?.Auditor.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4 min-h-48">
 						<h1 className="font-semibold text-lg">Senators</h1>
 						{votes?.Senators.map((senator, index) => (
-							<p key={index + 1}>{senator}</p>
+							<p key={index + 1}>{senator.name}</p>
 						))}
 					</div>
 				</div>
@@ -317,10 +345,10 @@ const Vote = () => {
 			<div className=" w-full flex flex-col gap-2 overflow-y-scroll">
 				{positions.map((position) => (
 					<div key={position} className="">
-						<h2 className="text-xl font-bold text-center bg-zinc-900 text-zinc-100 mb-2">
-							{position}
+						<h2 className="text-xl font-medium text-center bg-zinc-900 text-zinc-100 mb-2 py-1">
+							{formatPosition(position)}
 						</h2>
-						<div className="rounded-md flex flex-col gap-2 p-4">
+						<div className="rounded-md flex flex-col gap-2 py-2 px-4">
 							{candidates
 								.filter((c) => c.position === position)
 								.map((c) => (
