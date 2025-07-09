@@ -1,4 +1,20 @@
+import mongoose from 'mongoose';
 import Vote from '../models/Vote.js';
+
+const formatVotes = (votes) => {
+    const formatted = {};
+
+    for (const [key, value] of Object.entries(votes)) {
+        if (Array.isArray(value)) {
+            formatted[key] = value.map((id) => new mongoose.Types.ObjectId(id));
+        } else {
+            formatted[key] = new mongoose.Types.ObjectId(value);
+        }
+    }
+
+    return formatted;
+};
+
 
 export const submitVote = async (req, res) => {
     try {
@@ -8,12 +24,12 @@ export const submitVote = async (req, res) => {
             return res.status(400).json({ message: 'Missing required fields.' });
         }
 
-        // Optional: validate vote ObjectIds here if needed
+        const formattedVotes = formatVotes(votes);
 
         const newVote = new Vote({
             yearLevel,
             department,
-            votes,
+            votes: formattedVotes, // ✅ Corrected
         });
 
         const savedVote = await newVote.save();

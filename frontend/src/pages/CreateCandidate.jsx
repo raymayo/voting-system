@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 
 const CreateCandidate = () => {
@@ -11,17 +11,29 @@ const CreateCandidate = () => {
 		imageUrl: '',
 	});
 
+	const fileInputRef = useRef(null);
+
+	const [imageFile, setImageFile] = useState(null);
+
 	const postCandidate = async (e) => {
 		e.preventDefault();
+
+		const formData = new FormData();
+		formData.append('name', candidate.name);
+		formData.append('position', candidate.position);
+		formData.append('party', candidate.party);
+		formData.append('yearLevel', candidate.yearLevel);
+		formData.append('department', candidate.department);
+		formData.append('image', imageFile); // key must match backend
+
 		try {
-			const res = await axios.post(
-				'http://localhost:5000/api/candidate',
-				candidate
-			);
-			console.log('success', res.data);
-		} catch (err) {
-			console.error(err);
-		} finally {
+			await axios.post('http://localhost:5000/api/candidate', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+			alert('Candidate submitted');
+
 			setCandidate({
 				name: '',
 				position: '',
@@ -31,12 +43,20 @@ const CreateCandidate = () => {
 				imageUrl: '',
 			});
 
-			console.log('cadidate created successfully');
+			setImageFile(null);
+			if (fileInputRef.current) fileInputRef.current.value = null;
+		} catch (err) {
+			console.error(err);
 		}
 	};
 
 	const handleChange = (e) => {
-		setCandidate({ ...candidate, [e.target.name]: e.target.value });
+		if (e.target.name === 'imageUrl') {
+			setImageFile(e.target.files[0]);
+		} else {
+			setCandidate({ ...candidate, [e.target.name]: e.target.value });
+		}
+
 		console.log(candidate);
 	};
 
@@ -110,7 +130,6 @@ const CreateCandidate = () => {
 						<option value="" disabled>
 							Select Year Level
 						</option>
-
 						<option value="1">1st Year</option>
 						<option value="2">2nd Year</option>
 						<option value="3">3rd Year</option>
@@ -131,11 +150,12 @@ const CreateCandidate = () => {
 				<label className="flex flex-col text-sm">
 					<span>Upload Image</span>
 					<input
+						ref={fileInputRef}
 						onChange={handleChange}
 						name="imageUrl"
 						type="file"
 						className="border rounded-md px-2 py-2 border-zinc-200 "
-						value={candidate.imageUrl}
+						accept="image/*"
 					/>
 				</label>
 				<button

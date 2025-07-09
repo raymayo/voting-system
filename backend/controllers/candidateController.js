@@ -2,24 +2,23 @@ import Candidate from '../models/Candidate.js';
 
 export const CreateCandidate = async (req, res) => {
 	try {
-		console.log('request body:', req.body);
-
-		const { name, position, department, yearLevel, party, imageUrl } = req.body
+		const { name, position, party, department, yearLevel } = req.body;
+		const imageUrl = req.file ? `/uploads/${req.file.filename}` : '';
 
 		const candidate = new Candidate({
 			name,
 			position,
-			department,
-			yearLevel,
 			party,
+			yearLevel,
+			department,
 			imageUrl,
-		})
+		});
 
-		const savedCandidate = await candidate.save()
-
-		res.status(201).json(savedCandidate)
+		await candidate.save();
+		res.status(201).json({ message: 'Candidate created', candidate });
 	} catch (err) {
 		console.error(err);
+		res.status(500).json({ message: 'Error creating candidate' });
 	}
 };
 

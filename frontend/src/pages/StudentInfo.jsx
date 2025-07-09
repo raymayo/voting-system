@@ -55,7 +55,7 @@ const StudentInfo = () => {
 
 				<button
 					onClick={handleStartVoting}
-					className="bg-green-500 text-white rounded-md border-green-800 p-2"
+					className="bg-green-500 text-zinc-900 rounded-md border font-medium border-zinc-900/25 cursor-pointer p-2"
 					type="submit">
 					Start Voting
 				</button>

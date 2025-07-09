@@ -147,9 +147,9 @@ const Vote = () => {
 			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
 				<div>
 					<h1 className="text-2xl font-semibold mb-4">Student's Candidates</h1>
-					<div>
-						<h1>{yearLevel}</h1>
-						<h1>{department}</h1>
+					<div className="flex gap-4 justify-center">
+						<h1>Year Level: {yearLevel}</h1>
+						<h1>Department: {department}</h1>
 					</div>
 					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">President</h1>
@@ -258,8 +258,9 @@ const Vote = () => {
 									/>
 									<img
 										src={
-											senator?.imageUrl ||
-											'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010'
+											senator.imageUrl
+												? `http://localhost:5000${senator.imageUrl}`
+												: 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010'
 										}
 										alt={senator.name}
 										className="w-12 h-12 object-cover rounded-full"
