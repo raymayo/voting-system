@@ -30,6 +30,16 @@ const Vote = () => {
 	const handleSenatorVoteChange = (senatorId) => {
 		setVotes((prevVotes) => {
 			const senators = prevVotes.Senators.includes(senatorId)
+				? prevVotes.Senators.filter((id) => id !== senatorId)
+				: [...prevVotes.Senators, senatorId];
+			return {
+				...prevVotes,
+				Senators: senators,
+			};
+		});
+
+		console.log(votes.Senators);
+	};
 
 	const candidates = [
 		// LABAN PARTIDO
@@ -294,6 +304,9 @@ const Vote = () => {
 					</div>
 					<div className="flex flex-col text-center">
 						<h1 className="font-semibold text-lg">Senators</h1>
+						{votes?.Senators.map((senator, index) => (
+							<p key={index + 1}>{senator}</p>
+						))}
 					</div>
 				</div>
 				<button className="bg-zinc-900 text-zinc-100 py-2 rounded-md">
@@ -359,7 +372,11 @@ const Vote = () => {
 										className="accent-zinc-900"
 										type="checkbox"
 										id={`senator-${senator.id}`}
-										onChange={(e) => handleChange(e, senator.id)}
+										// onChange={(e) => handleChange(e, senator.id)}
+										onChange={(e) => {
+											handleChange(e, senator.id);
+											handleSenatorVoteChange(senator.id);
+										}}
 										disabled={
 											selectedSenators.length >= 6 &&
 											!selectedSenators.includes(senator.id)
