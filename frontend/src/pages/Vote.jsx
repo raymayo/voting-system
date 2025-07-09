@@ -305,39 +305,37 @@ const Vote = () => {
 
 	return (
 		<div className="flex w-full h-screen">
-			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center flex flex-col justify-between">
-				<div className="">
-					<h1 className="text-xl font-medium mb-4  bg-zinc-900 text-zinc-100  border border-zinc-900">
-						Student's Candidates
-					</h1>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
+			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
+				<div>
+					<h1 className="text-2xl font-semibold mb-4">Student's Candidates</h1>
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">President</h1>
 						<p>{votes?.President.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">Vice President</h1>
 						<p>{votes?.Vice_President.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">Secretary</h1>
 						<p>{votes?.Secretary.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">Treasurer</h1>
 						<p>{votes?.Treasurer.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
 						<h1 className="font-semibold text-lg">Auditor</h1>
 						<p>{votes?.Auditor.name || 'N/A'}</p>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 mx-4 min-h-48">
+					<div className="flex flex-col text-center border-b border-zinc-300 p-2 min-h-48">
 						<h1 className="font-semibold text-lg">Senators</h1>
 						{votes?.Senators.map((senator, index) => (
 							<p key={index + 1}>{senator.name}</p>
 						))}
 					</div>
 				</div>
-				<button className="bg-zinc-900 text-zinc-100 py-2 rounded-md">
+				<button className="bg-zinc-900 text-zinc-100 py-2 rounded-md cursor-pointer">
 					Submit Votes
 				</button>
 			</section>
@@ -348,7 +346,7 @@ const Vote = () => {
 						<h2 className="text-xl font-medium text-center bg-zinc-900 text-zinc-100 mb-2 py-1">
 							{formatPosition(position)}
 						</h2>
-						<div className="rounded-md flex flex-col gap-2 py-2 px-4">
+						<div className="rounded-md flex flex-col gap-2 p-4">
 							{candidates
 								.filter((c) => c.position === position)
 								.map((c) => (
@@ -383,7 +381,7 @@ const Vote = () => {
 				))}
 
 				<div>
-					<h2 className="text-xl font-bold text-center bg-zinc-900 text-zinc-100 mb-2">
+					<h2 className="text-xl font-medium text-center bg-zinc-900 text-zinc-100 mb-2 py-1">
 						Senators
 					</h2>
 					<p>Maximum selection: 6 senators</p>
