@@ -9,7 +9,7 @@ const Landing = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 flex items-center justify-center px-4">
+		<div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-200 flex items-center justify-center px-4">
 			<div className="bg-white/60 backdrop-blur-lg shadow-lg rounded-3xl p-10 max-w-lg text-center border border-emerald-200 animate-fade-in">
 				<img
 					src="../../public/logo.jfif"

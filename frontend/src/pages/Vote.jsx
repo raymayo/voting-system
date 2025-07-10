@@ -154,8 +154,8 @@ const Vote = () => {
 	};
 
 	return (
-		<div className="flex w-full h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 ">
-			<section className="max-w-md bg-transparent  shadow-2xs w-full text-center p-6 flex flex-col justify-between">
+		<div className="flex w-full h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-200 ">
+			<section className="max-w-md bg-transparent shadow-2xs w-full text-center p-6 flex flex-col justify-between">
 				<div className="border rounded-xl p-6 h-full bg-white border-emerald-200 shadow-lg flex flex-col justify-between">
 					<div className="flex flex-col">
 						<img
@@ -235,7 +235,7 @@ const Vote = () => {
 										key={c.id}
 										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100 has-checked:bg-white has-checked:border has-checked:border-zinc-900/20 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
 										<input
-											className="accent-zinc-900"
+											className="accent-emerald-600"
 											type="radio"
 											name={position}
 											value={c.id}
@@ -261,11 +261,11 @@ const Vote = () => {
 					</div>
 				))}
 
-				<div className="border rounded-lg">
-					<h2 className="text-xl font-medium text-center bg-emerald-900 text-zinc-100 mb-2 py-1">
+				<div className="border border-emerald-200 rounded-lg bg-white/60 shadow-2xs">
+					<h2 className="text-xl font-bold text-center bg-emerald-600 text-zinc-100 mb-2 py-1">
 						Senators
 					</h2>
-					<p>Maximum selection: 6 senators</p>
+					<p className="text-center">Maximum selection: 6 senators</p>
 					{Object.keys(groupedByParty).map((party) => (
 						<div
 							key={party}
@@ -276,7 +276,7 @@ const Vote = () => {
 									key={senator.id}
 									className="cursor-pointer  has-checked:bg-white hover:bg-zinc-100 has-checked:border-zinc-900/50 border border-white rounded-lg px-4 py-2 flex items-center gap-3">
 									<input
-										className="accent-zinc-900"
+										className="accent-emerald-600"
 										type="checkbox"
 										id={`senator-${senator.id}`}
 										// onChange={(e) => handleChange(e, senator.id)}
