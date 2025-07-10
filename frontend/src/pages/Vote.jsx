@@ -144,7 +144,7 @@ const Vote = () => {
 
 	return (
 		<div className="flex w-full h-screen">
-			<section className="max-w-lg border-r border-zinc-200 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
+			<section className="max-w-md border-r bg-zinc-100 border-zinc-300 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
 				<div>
 					<h1 className="text-2xl font-semibold mb-4">Student's Candidates</h1>
 					<div className="flex gap-4 justify-center">
@@ -185,10 +185,12 @@ const Vote = () => {
 				</button>
 			</section>
 
-			<div className=" w-full flex flex-col gap-2 overflow-y-scroll">
+			<div className=" w-full flex flex-col gap-6 overflow-y-scroll p-6">
 				{positions.map((position) => (
-					<div key={position} className="">
-						<h2 className="text-xl font-medium text-center bg-zinc-900 text-zinc-100 mb-2 py-1">
+					<div
+						key={position}
+						className="border rounded-md border-zinc-200 shodow-2xs">
+						<h2 className="text-xl text-center text-zinc-900 font-semibold border-zinc-300 shadow-2xs bg-zinc-100 border-b py-1">
 							{formatPosition(position)}
 						</h2>
 						<div className="rounded-md flex flex-col gap-2 p-4">
@@ -197,7 +199,7 @@ const Vote = () => {
 								.map((c) => (
 									<label
 										key={c.id}
-										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100 has-checked:bg-white has-checked:border has-checked:border-zinc-900/50 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
+										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100 has-checked:bg-white has-checked:border has-checked:border-zinc-900/20 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
 										<input
 											className="accent-zinc-900"
 											type="radio"

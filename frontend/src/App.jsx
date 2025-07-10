@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	BrowserRouter as Router,
 	Routes,
@@ -6,24 +5,46 @@ import {
 	Navigate,
 } from 'react-router-dom';
 
-import './App.css';
 import Landing from './pages/Landing.jsx';
-import StudentInfo from './pages/StudentInfo.jsx';
 import Vote from './pages/Vote.jsx';
+import AdminLogin from './pages/AdminLogin.jsx';
+import AdminRegister from './components/AdminRegister.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
 import CreateCandidate from './pages/CreateCandidate.jsx';
+import StudentInfo from './pages/StudentInfo.jsx';
+import AdminLayout from './components/AdminLayout.jsx';
+import AdminRoute from './components/AdminRoute.jsx';
+// import Unauthorized from './pages/Unauthorized.jsx'; // 👈 make sure this page exists
+
 function App() {
 	return (
-		<div>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Landing />} />
-					<Route path="/student-info" element={<StudentInfo />} />
-					<Route path="/vote" element={<Vote />} />
-					<Route path="/create-candidate" element={<CreateCandidate />} />
-					<Route path="*" element={<Navigate to="/" replace />} />
-				</Routes>
-			</Router>
-		</div>
+		<Router>
+			<Routes>
+				{/* Public Routes */}
+				<Route path="/" element={<Landing />} />
+				<Route path="/vote" element={<Vote />} />
+				<Route path="/admin-login" element={<AdminLogin />} />
+				<Route path="/admin-register" element={<AdminRegister />} />
+				{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
+
+				{/* Protected Admin Routes */}
+				<Route
+					path="/admin"
+					element={
+						<AdminRoute>
+							<AdminLayout />
+						</AdminRoute>
+					}>
+					<Route index element={<Navigate to="dashboard" replace />} />
+					<Route path="dashboard" element={<AdminDashboard />} />
+					<Route path="create-candidate" element={<CreateCandidate />} />
+					<Route path="admin-register" element={<AdminRegister />} />
+				</Route>
+
+				{/* Catch-all */}
+				<Route path="*" element={<Navigate to="/" replace />} />
+			</Routes>
+		</Router>
 	);
 }
 
