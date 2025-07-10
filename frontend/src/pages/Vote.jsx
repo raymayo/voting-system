@@ -161,7 +161,7 @@ const Vote = () => {
 						<img
 							src="../../public/logo.jfif"
 							alt="School Logo"
-							className="mx-auto w-16 h-16 mb-2"
+							className="mx-auto w-14 h-14 mb-2"
 						/>
 						<h1 className="text-2xl font-semibold  text-emerald-800">
 							Student's Candidates
@@ -200,7 +200,7 @@ const Vote = () => {
 							</h1>
 							<p>{votes?.Auditor.name || 'N/A'}</p>
 						</div>
-						<div className="flex flex-col text-center border-b border-emerald-200 p-1 h-[140px]">
+						<div className="flex flex-col text-center  border-emerald-200 p-1 ">
 							<h1 className="font-semibold text-lg  text-emerald-800">
 								Senators
 							</h1>
@@ -219,21 +219,21 @@ const Vote = () => {
 				</div>
 			</section>
 
-			<div className=" w-full flex flex-col gap-6 overflow-y-scroll py-6">
+			<div className=" w-full grid grid-cols-1 gap-4 overflow-y-scroll py-6">
 				{positions.map((position) => (
 					<div
 						key={position}
-						className="border rounded-lg border-emerald-200 shodow-2xs bg-white shadow">
-						<h2 className="text-xl text-center text-white font-semibold border-emerald-200 shadow-2xs bg-emerald-600 border-b py-1 rounded-t-lg">
+						className="border rounded-xl border-emerald-200 shodow-2xs bg-white/60 shadow">
+						<h2 className="text-xl text-center text-emerald-100 font-semibold border-emerald-200 shadow-2xs bg-emerald-600 border-b py-1 rounded-t-lg">
 							{formatPosition(position)}
 						</h2>
-						<div className="rounded-md grid grid-cols-2 gap-2 p-4">
+						<div className="rounded-md grid  gap-2 p-4">
 							{candidates
 								.filter((c) => c.position === position)
 								.map((c) => (
 									<label
 										key={c.id}
-										className="flex rounded-lg gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100 has-checked:bg-white has-checked:border has-checked:border-zinc-900/20 has-checked:text-zinc-900 has-checked:shadow-2xs border border-white">
+										className="flex rounded-full gap-2 px-4 py-2 cursor-pointer hover:bg-zinc-100  has-checked:border-2 has-checked:border-emerald-600/50 has-checked:text-zinc-900 has-checked:shadow-2xs border-2 border-white ">
 										<input
 											className="accent-emerald-600"
 											type="radio"
@@ -262,10 +262,12 @@ const Vote = () => {
 				))}
 
 				<div className="border border-emerald-200 rounded-lg bg-white/60 shadow-2xs">
-					<h2 className="text-xl font-bold text-center bg-emerald-600 text-zinc-100 mb-2 py-1">
+					<h2 className="text-xl font-bold text-center rounded-t-lg bg-emerald-600 text-zinc-100 mb-2 py-1">
 						Senators
 					</h2>
-					<p className="text-center">Maximum selection: 6 senators</p>
+					<p className="text-center text-zinc-600">
+						Maximum selection: 6 senators
+					</p>
 					{Object.keys(groupedByParty).map((party) => (
 						<div
 							key={party}
@@ -274,7 +276,7 @@ const Vote = () => {
 							{groupedByParty[party].map((senator) => (
 								<label
 									key={senator.id}
-									className="cursor-pointer  has-checked:bg-white hover:bg-zinc-100 has-checked:border-zinc-900/50 border border-white rounded-lg px-4 py-2 flex items-center gap-3">
+									className="cursor-pointer has-checked:bg-white hover:bg-zinc-100 has-checked:border-emerald-200 border border-white rounded-lg px-4 py-2 flex items-center gap-3">
 									<input
 										className="accent-emerald-600"
 										type="checkbox"
