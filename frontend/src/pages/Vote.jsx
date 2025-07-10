@@ -213,7 +213,7 @@ const Vote = () => {
 					</div>
 					<button
 						onClick={handleSubmitVotes}
-						className="bg-emerald-600 text-zinc-100 py-2 rounded-md cursor-pointer font-bold w-full items-end">
+						className="bg-emerald-600 text-zinc-100 py-2 rounded-full cursor-pointer font-bold w-full items-end">
 						Submit Votes
 					</button>
 				</div>
@@ -223,11 +223,11 @@ const Vote = () => {
 				{positions.map((position) => (
 					<div
 						key={position}
-						className="border rounded-lg border-emerald-200 shodow-2xs bg-white">
-						<h2 className="text-xl text-center text-emerald-900 font-semibold border-emerald-200 shadow-2xs bg-emerald-500 border-b py-1 rounded-t-lg">
+						className="border rounded-lg border-emerald-200 shodow-2xs bg-white shadow">
+						<h2 className="text-xl text-center text-white font-semibold border-emerald-200 shadow-2xs bg-emerald-600 border-b py-1 rounded-t-lg">
 							{formatPosition(position)}
 						</h2>
-						<div className="rounded-md flex flex-col gap-2 p-4">
+						<div className="rounded-md grid grid-cols-2 gap-2 p-4">
 							{candidates
 								.filter((c) => c.position === position)
 								.map((c) => (
@@ -244,10 +244,7 @@ const Vote = () => {
 										/>
 										<div className="flex items-center space-x-4">
 											<img
-												src={
-													c?.imageUrl ||
-													'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010'
-												}
+												src={c?.imageUrl || '../../public/default.png'}
 												alt={c.name}
 												className="w-12 h-12 object-cover rounded-full"
 											/>
@@ -264,8 +261,8 @@ const Vote = () => {
 					</div>
 				))}
 
-				<div>
-					<h2 className="text-xl font-medium text-center bg-zinc-900 text-zinc-100 mb-2 py-1">
+				<div className="border rounded-lg">
+					<h2 className="text-xl font-medium text-center bg-emerald-900 text-zinc-100 mb-2 py-1">
 						Senators
 					</h2>
 					<p>Maximum selection: 6 senators</p>
