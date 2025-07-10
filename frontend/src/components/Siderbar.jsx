@@ -6,7 +6,7 @@ const Sidebar = () => {
 	const active = 'bg-gray-300 font-semibold';
 
 	return (
-		<aside className="w-64 h-screen bg-white border-r p-4 fixed">
+		<aside className="w-64 h-screen bg-emerald-600 p-4 fixed">
 			<h1 className="text-xl font-bold mb-6">Admin Panel</h1>
 
 			<nav className="space-y-2">

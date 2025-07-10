@@ -27,14 +27,14 @@ const AdminLogin = () => {
 	};
 
 	return (
-		<div className="w-screen h-screen  bg-gradient-to-br from-emerald-50 via-white to-emerald-200 grid place-items-center">
+		<div className="w-screen h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-200 grid place-items-center">
 			<form
-				className="border flex flex-col max-w-xl w-full p-8 border-emerald-200 rounded-3xl shadow-2xs gap-4 bg-white/60"
+				className="shadow-lg border flex flex-col max-w-xl w-full p-8 border-emerald-200 rounded-3xl gap-4 bg-white/60"
 				onSubmit={handleLogin}>
 				<img
 					src="../../public/logo.jfif"
 					alt="School Logo"
-					className="mx-auto w-18 h-18"
+					className="mx-auto w-20 h-20"
 				/>
 				<h1 className="text-center text-3xl font-bold text-emerald-800 flex flex-col items-center gap-1">
 					Admin Sign In
@@ -63,7 +63,7 @@ const AdminLogin = () => {
 					/>
 				</label>
 				<button
-					className="bg-emerald-600 py-2 text-zinc-50 rounded-full font-semibold mt-8 hover:bg-emerald-600/80 cursor-pointer"
+					className="bg-emerald-600 py-2 text-zinc-50 rounded-full font-medium mt-8 hover:bg-emerald-600/80 cursor-pointer"
 					type="submit">
 					Login
 				</button>

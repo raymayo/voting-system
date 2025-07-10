@@ -26,6 +26,7 @@ function App() {
 				<Route path="/vote" element={<Vote />} />
 				<Route path="/admin-login" element={<AdminLogin />} />
 				<Route path="/student-info" element={<StudentInfo />} />
+				{/* <Route path="/create" element={<AdminRegister />} /> */}
 
 				{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
 

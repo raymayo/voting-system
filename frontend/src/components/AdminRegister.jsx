@@ -27,11 +27,13 @@ const AdminRegister = () => {
 	};
 
 	return (
-		<div className="bg-zinc-50 w-screen h-screen grid place-items-center">
+		<div className="bg-gradient-to-br from-emerald-50 via-white to-emerald-200 w-full h-screen grid place-items-center">
 			<form
 				onSubmit={handleRegister}
-				className="max-w-xl w-full bg-white rounded-md border border-zinc-200 shadow-2xs flex flex-col  gap-4 p-6">
-				<h2 className="text-xl font-semibold">Register Admin</h2>
+				className="max-w-xl w-full bg-white rounded-2xl border border-emerald-200 shadow-2xs flex flex-col gap-4 p-6">
+				<h2 className="text-2xl text-emerald-800 font-semibold text-center">
+					Register Admin
+				</h2>
 
 				<input
 					name="name"
@@ -39,7 +41,7 @@ const AdminRegister = () => {
 					value={form.name}
 					onChange={handleChange}
 					required
-					className="border px-4 py-2 w-full rounded border-zinc-200"
+					className="border px-4 py-2 w-full rounded border-zinc-200 text-emerald-900 font-medium"
 				/>
 				<input
 					name="email"
@@ -48,7 +50,7 @@ const AdminRegister = () => {
 					value={form.email}
 					onChange={handleChange}
 					required
-					className="border px-4 py-2 w-full rounded border-zinc-200"
+					className="border px-4 py-2 w-full rounded border-zinc-200 text-emerald-900 font-medium"
 				/>
 				<input
 					name="password"
@@ -57,12 +59,12 @@ const AdminRegister = () => {
 					value={form.password}
 					onChange={handleChange}
 					required
-					className="border px-4 py-2 w-full rounded border-zinc-200"
+					className="border px-4 py-2 w-full rounded border-zinc-200 text-emerald-900 font-medium"
 				/>
 
 				<button
 					type="submit"
-					className="bg-zinc-900 text-white py-2 px-4 rounded-md cursor-pointer">
+					className="bg-emerald-600 text-white py-2 px-4 rounded-full cursor-pointer">
 					Register
 				</button>
 

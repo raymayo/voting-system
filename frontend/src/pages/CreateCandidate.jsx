@@ -61,12 +61,14 @@ const CreateCandidate = () => {
 	};
 
 	return (
-		<div className="grid place-items-center h-screen w-screen bg-zinc-100/50">
+		<div className="grid place-items-center h-screen w-full bg-gradient-to-br from-emerald-50 via-white to-emerald-200">
 			<form
 				onSubmit={postCandidate}
-				className="flex flex-col border w-full max-w-xl gap-4 p-8 border-zinc-200 rounded-lg shadow-2xs bg-white">
-				<h1 className="text-xl font-semibold text-center">Create Candidate</h1>
-				<label className="flex flex-col text-sm">
+				className="flex flex-col border w-full max-w-xl gap-4 p-8 border-emerald-200 rounded-3xl shadow-2xs bg-white">
+				<h1 className="text-xl font-bold text-center text-emerald-800">
+					Create Candidate
+				</h1>
+				<label className="flex flex-col text-sm text-emerald-900 font-medium">
 					Name
 					<input
 						onChange={handleChange}
@@ -77,7 +79,7 @@ const CreateCandidate = () => {
 						className="border rounded-md px-2 py-2 border-zinc-200 "
 					/>
 				</label>
-				<label className="flex flex-col text-sm cursor-pointer">
+				<label className="flex flex-col text-sm text-emerald-900 font-medium cursor-pointer">
 					Position
 					<select
 						onChange={handleChange}
@@ -97,7 +99,7 @@ const CreateCandidate = () => {
 						<option value="Senator">Senator</option>
 					</select>
 				</label>
-				<label className="flex flex-col text-sm">
+				<label className="flex flex-col text-sm text-emerald-900 font-medium">
 					Department
 					<select
 						onChange={handleChange}
@@ -118,7 +120,7 @@ const CreateCandidate = () => {
 						<option value="BSHM">BSHM</option>{' '}
 					</select>
 				</label>
-				<label className="flex flex-col text-sm">
+				<label className="flex flex-col text-sm text-emerald-900 font-medium">
 					Year Level
 					<select
 						onChange={handleChange}
@@ -136,7 +138,7 @@ const CreateCandidate = () => {
 						<option value="4">4th Year</option>
 					</select>
 				</label>
-				<label className="flex flex-col text-sm">
+				<label className="flex flex-col text-sm text-emerald-900 font-medium">
 					Party
 					<input
 						onChange={handleChange}
@@ -147,7 +149,7 @@ const CreateCandidate = () => {
 						value={candidate.party}
 					/>
 				</label>
-				<label className="flex flex-col text-sm">
+				<label className="flex flex-col text-sm text-emerald-900 font-medium">
 					<span>Upload Image</span>
 					<input
 						ref={fileInputRef}
@@ -160,7 +162,7 @@ const CreateCandidate = () => {
 				</label>
 				<button
 					type="submit"
-					className="bg-zinc-900 text-zinc-100 px-4 py-2 rounded-md mt-8">
+					className="bg-emerald-600 font-medium text-zinc-100 px-4 py-2 rounded-full mt-8">
 					Create Candidate
 				</button>
 			</form>
