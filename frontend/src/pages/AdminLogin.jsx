@@ -20,7 +20,7 @@ const AdminLogin = () => {
 			setMsg(`Welcome, ${name}`);
 
 			// Navigate to admin dashboard
-			if (role === 'admin') navigate('/dashboard');
+			if (role === 'admin') navigate('/admin/dashboard');
 		} catch (err) {
 			setMsg(err.response?.data?.message || 'Login failed');
 		}
@@ -31,7 +31,7 @@ const AdminLogin = () => {
 			<form
 				className="border flex flex-col max-w-xl w-full p-8 border-zinc-200 rounded-md shadow-2xs gap-4 bg-white"
 				onSubmit={handleLogin}>
-				<h1 className="text-center text-xl font-Semibold">Sign In</h1>
+				<h1 className="text-center text-xl font-bold">Sign In</h1>
 				<label className="flex flex-col">
 					Email
 					<input
@@ -52,11 +52,15 @@ const AdminLogin = () => {
 					/>
 				</label>
 				<button
-					className="bg-zinc-900 py-2 text-zinc-50 rounded-md mt-8"
+					className="bg-zinc-900 py-2 text-zinc-50 rounded-md mt-8 hover:bg-zinc-900/90 cursor-pointer"
 					type="submit">
 					Login
 				</button>
-				<p>{msg}</p>
+				<p
+					className="
+				text-center">
+					{msg}
+				</p>
 			</form>
 		</div>
 	);

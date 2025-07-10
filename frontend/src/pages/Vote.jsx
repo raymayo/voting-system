@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Vote = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const { department, yearLevel } = location.state || {};
 
 	const positions = [
@@ -133,6 +134,16 @@ const Vote = () => {
 
 			console.log('Vote submitted:', res.data);
 			alert('✅ Your vote has been submitted successfully!');
+			setVotes({
+				President: { id: null, name: '' },
+				Vice_President: { id: null, name: '' },
+				Secretary: { id: null, name: '' },
+				Treasurer: { id: null, name: '' },
+				Auditor: { id: null, name: '' },
+				Senators: [],
+			});
+			// localStorage.clear();
+			navigate('/');
 		} catch (err) {
 			console.error(
 				'❌ Vote submission failed:',
@@ -143,54 +154,77 @@ const Vote = () => {
 	};
 
 	return (
-		<div className="flex w-full h-screen">
-			<section className="max-w-md border-r bg-zinc-100 border-zinc-300 shadow-2xs w-full text-center p-8 flex flex-col justify-between">
-				<div>
-					<h1 className="text-2xl font-semibold mb-4">Student's Candidates</h1>
-					<div className="flex gap-4 justify-center">
-						<h1>Year Level: {yearLevel}</h1>
-						<h1>Department: {department}</h1>
+		<div className="flex w-full h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 ">
+			<section className="max-w-md bg-transparent  shadow-2xs w-full text-center p-6 flex flex-col justify-between">
+				<div className="border rounded-xl p-6 h-full bg-white border-emerald-200 shadow-lg flex flex-col justify-between">
+					<div className="flex flex-col">
+						<img
+							src="../../public/logo.jfif"
+							alt="School Logo"
+							className="mx-auto w-16 h-16 mb-2"
+						/>
+						<h1 className="text-2xl font-semibold  text-emerald-800">
+							Student's Candidates
+						</h1>
+						<div className="flex gap-4 justify-center">
+							<h1>Year Level: {yearLevel}</h1>
+							<h1>Department: {department}</h1>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								President
+							</h1>
+							<p>{votes?.President.name || 'N/A'}</p>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								Vice President
+							</h1>
+							<p>{votes?.Vice_President.name || 'N/A'}</p>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								Secretary
+							</h1>
+							<p>{votes?.Secretary.name || 'N/A'}</p>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								Treasurer
+							</h1>
+							<p>{votes?.Treasurer.name || 'N/A'}</p>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								Auditor
+							</h1>
+							<p>{votes?.Auditor.name || 'N/A'}</p>
+						</div>
+						<div className="flex flex-col text-center border-b border-emerald-200 p-1 h-[140px]">
+							<h1 className="font-semibold text-lg  text-emerald-800">
+								Senators
+							</h1>
+							<div className="grid grid-cols-2">
+								{votes?.Senators.map((senator, index) => (
+									<p key={index + 1}>{senator.name}</p>
+								))}
+							</div>
+						</div>
 					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
-						<h1 className="font-semibold text-lg">President</h1>
-						<p>{votes?.President.name || 'N/A'}</p>
-					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
-						<h1 className="font-semibold text-lg">Vice President</h1>
-						<p>{votes?.Vice_President.name || 'N/A'}</p>
-					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
-						<h1 className="font-semibold text-lg">Secretary</h1>
-						<p>{votes?.Secretary.name || 'N/A'}</p>
-					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
-						<h1 className="font-semibold text-lg">Treasurer</h1>
-						<p>{votes?.Treasurer.name || 'N/A'}</p>
-					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2">
-						<h1 className="font-semibold text-lg">Auditor</h1>
-						<p>{votes?.Auditor.name || 'N/A'}</p>
-					</div>
-					<div className="flex flex-col text-center border-b border-zinc-300 p-2 min-h-48">
-						<h1 className="font-semibold text-lg">Senators</h1>
-						{votes?.Senators.map((senator, index) => (
-							<p key={index + 1}>{senator.name}</p>
-						))}
-					</div>
+					<button
+						onClick={handleSubmitVotes}
+						className="bg-emerald-600 text-zinc-100 py-2 rounded-md cursor-pointer font-bold w-full items-end">
+						Submit Votes
+					</button>
 				</div>
-				<button
-					onClick={handleSubmitVotes}
-					className="bg-zinc-900 text-zinc-100 py-2 rounded-md cursor-pointer">
-					Submit Votes
-				</button>
 			</section>
 
-			<div className=" w-full flex flex-col gap-6 overflow-y-scroll p-6">
+			<div className=" w-full flex flex-col gap-6 overflow-y-scroll py-6">
 				{positions.map((position) => (
 					<div
 						key={position}
-						className="border rounded-md border-zinc-200 shodow-2xs">
-						<h2 className="text-xl text-center text-zinc-900 font-semibold border-zinc-300 shadow-2xs bg-zinc-100 border-b py-1">
+						className="border rounded-lg border-emerald-200 shodow-2xs bg-white">
+						<h2 className="text-xl text-center text-emerald-900 font-semibold border-emerald-200 shadow-2xs bg-emerald-500 border-b py-1 rounded-t-lg">
 							{formatPosition(position)}
 						</h2>
 						<div className="rounded-md flex flex-col gap-2 p-4">

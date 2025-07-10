@@ -21,9 +21,16 @@ const StudentInfo = () => {
 	};
 
 	return (
-		<div className="grid place-items-center w-screen h-screen p-4">
-			<main className="border w-full max-w-xl flex flex-col p-8  gap-4 rounded-md shadow-2xs border-zinc-300">
-				<h1 className="text-xl text-center mb-4">Student Information</h1>
+		<div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-100 grid place-items-center w-screen h-screen p-4">
+			<main className="bg-white/60 backdrop-blur-lg shadow-lg rounded-3xl w-full max-w-xl flex flex-col p-8  gap-4  border border-emerald-200 animate-fade-in">
+				<img
+					src="../../public/logo.jfif"
+					alt="School Logo"
+					className="mx-auto w-20 h-20 "
+				/>
+				<h1 className="text-2xl font-bold text-green-900 text-center ">
+					Student Information
+				</h1>
 
 				<select
 					className="border p-2 border-zinc-200 cursor-pointer rounded-md"
@@ -55,7 +62,7 @@ const StudentInfo = () => {
 
 				<button
 					onClick={handleStartVoting}
-					className="bg-green-500 text-zinc-900 rounded-md border font-medium border-zinc-900/25 cursor-pointer p-2"
+					className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold cursor-pointer p-2 shadow-xl mt-4 rounded-full"
 					type="submit">
 					Start Voting
 				</button>

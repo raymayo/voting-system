@@ -22,10 +22,10 @@ function App() {
 			<Routes>
 				{/* Public Routes */}
 				<Route path="/" element={<Landing />} />
-				<Route path="/admin-register" element={<AdminRegister />} />
+				{/* <Route path="/admin-register" element={<AdminRegister />} /> */}
 				<Route path="/vote" element={<Vote />} />
 				<Route path="/admin-login" element={<AdminLogin />} />
-				<Route path="/student-info	" element={<StudentInfo />} />
+				<Route path="/student-info" element={<StudentInfo />} />
 
 				{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
 
