@@ -142,8 +142,8 @@ const Vote = () => {
 				Auditor: { id: null, name: '' },
 				Senators: [],
 			});
-			// localStorage.clear();
-			navigate('/');
+			localStorage.clear();
+			navigate('/thank-you');
 		} catch (err) {
 			console.error(
 				'❌ Vote submission failed:',
@@ -213,7 +213,7 @@ const Vote = () => {
 					</div>
 					<button
 						onClick={handleSubmitVotes}
-						className="bg-emerald-600 text-zinc-100 py-2 rounded-full cursor-pointer font-bold w-full items-end">
+						className="bg-emerald-600 text-white py-2 rounded-full cursor-pointer font-bold w-full items-end">
 						Submit Votes
 					</button>
 				</div>
@@ -224,7 +224,7 @@ const Vote = () => {
 					<div
 						key={position}
 						className="border rounded-xl border-emerald-200 shodow-2xs bg-white/60 shadow">
-						<h2 className="text-xl text-center text-emerald-100 font-semibold border-emerald-200 shadow-2xs bg-emerald-600 border-b py-1 rounded-t-lg">
+						<h2 className="text-xl text-center text-emerald-50 font-medium border-emerald-200 shadow-2xs bg-emerald-600 border-b py-1 rounded-t-lg">
 							{formatPosition(position)}
 						</h2>
 						<div className="rounded-md grid  gap-2 p-4">

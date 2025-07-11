@@ -33,7 +33,7 @@ const StudentInfo = () => {
 				</h1>
 
 				<select
-					className="border p-2 border-zinc-200 cursor-pointer rounded-md"
+					className="border p-2 border-zinc-200 cursor-pointer rounded-md text-emerald-900 font-medium"
 					name="Department"
 					value={department}
 					onChange={(e) => setDepartment(e.target.value)}>
@@ -47,7 +47,7 @@ const StudentInfo = () => {
 				</select>
 
 				<select
-					className="border p-2 border-zinc-200 cursor-pointer rounded-md"
+					className="border p-2 border-zinc-200 cursor-pointer rounded-md text-emerald-900 font-medium"
 					name="Year Level"
 					value={yearLevel}
 					onChange={(e) => setYearLevel(e.target.value)}>

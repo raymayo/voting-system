@@ -56,12 +56,29 @@ const AdminDasboard = () => {
 				label: 'Votes',
 				data: data.map((d) => d.count),
 				backgroundColor: [
-					'#3b82f6',
-					'#ef4444',
-					'#10b981',
-					'#f59e0b',
-					'#6366f1',
-					'#ec4899',
+					'#7b2cbf',
+					'#FF595E', //red
+					'#1982C4', //blue
+					'#FFCA3A', //yellow
+				],
+				borderWidth: 1,
+			},
+		],
+	});
+
+	const formatChartData2 = (data) => ({
+		labels: data.map((d) => d.label),
+		datasets: [
+			{
+				label: 'Votes',
+				data: data.map((d) => d.count),
+				backgroundColor: [
+					'#1B4332',
+					'#52B788',
+					'#95D5B2',
+					'#D8F3DC',
+					// '#6366f1',
+					// '#ec4899',
 				],
 				borderWidth: 1,
 			},
@@ -69,25 +86,29 @@ const AdminDasboard = () => {
 	});
 
 	return (
-		<div className="p-6 max-w-5xl mx-auto">
+		<div className="max-w-5xl mx-auto border rounded-xl p-8 border-emerald-200 bg-white/60 shadow">
 			<h1 className="text-2xl font-bold mb-6">Election Analytics</h1>
-			<div className="grid grid-cols-2">
+			<div className="grid grid-cols-2 gap-6">
 				{/* Candidate Votes */}
 				{/* <div className="mb-8 col-span-3">
-					<h2 className="text-lg font-semibold mb-2">Candidate Vote Counts</h2>
+					<h2 className="text-lg font-semibold mb-2 text-emerald-800 text-center">Candidate Vote Counts</h2>
 					<Bar data={formatChartData(candidateVotes)} />
 				</div> */}
 
 				{/* Turnout by Department */}
-				<div className="mb-8">
-					<h2 className="text-lg font-semibold mb-2">Turnout by Department</h2>
+				<div className="mb-8 border p-4 rounded-2xl border-emerald-200 bg-white/60">
+					<h2 className="text-lg font-semibold mb-2 text-emerald-800 text-center">
+						Turnout by Department
+					</h2>
 					<Pie data={formatChartData(turnoutByDept)} />
 				</div>
 
 				{/* Turnout by Year Level */}
-				<div className="mb-8">
-					<h2 className="text-lg font-semibold mb-2">Turnout by Year Level</h2>
-					<Pie data={formatChartData(turnoutByYear)} />
+				<div className="mb-8 border p-4 rounded-2xl border-emerald-200 bg-white/60">
+					<h2 className="text-lg font-semibold mb-2 text-emerald-800 text-center">
+						Turnout by Year Level
+					</h2>
+					<Pie data={formatChartData2(turnoutByYear)} />
 				</div>
 			</div>
 		</div>

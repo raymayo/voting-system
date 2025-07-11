@@ -3,10 +3,12 @@ import Sidebar from './Siderbar.jsx';
 
 const AdminLayout = () => {
 	return (
-		<div className="">
+		<div className="flex bg-gradient-to-br from-emerald-50 via-white to-emerald-200">
 			<Sidebar />
 
-			<Outlet />
+			<div className="grid place-items-center w-full">
+				<Outlet />
+			</div>
 		</div>
 	);
 };

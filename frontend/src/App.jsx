@@ -14,6 +14,7 @@ import CreateCandidate from './pages/CreateCandidate.jsx';
 import StudentInfo from './pages/StudentInfo.jsx';
 import AdminLayout from './components/AdminLayout.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
+import ThankYou from './pages/ThankYou.jsx';
 // import Unauthorized from './pages/Unauthorized.jsx'; // 👈 make sure this page exists
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
 				<Route path="/vote" element={<Vote />} />
 				<Route path="/admin-login" element={<AdminLogin />} />
 				<Route path="/student-info" element={<StudentInfo />} />
+				<Route path="/thank-you" element={<ThankYou />} />
+
 				{/* <Route path="/create" element={<AdminRegister />} /> */}
 
 				{/* <Route path="/unauthorized" element={<Unauthorized />} /> */}
